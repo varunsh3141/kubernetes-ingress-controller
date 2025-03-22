@@ -44,3 +44,8 @@ updates:
     interval: daily
   labels:
   - docker
+
+- package-ecosystem: docker
+  directory: /.github/actions/redhat-opdev-preflight-action
+  schedule:
+    interval: daily

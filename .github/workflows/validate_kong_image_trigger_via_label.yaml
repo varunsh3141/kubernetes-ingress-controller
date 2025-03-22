@@ -20,6 +20,11 @@ jobs:
       ISSUE_NUMBER: ${{ github.event.issue.number }}
       GH_TOKEN: ${{ secrets.K8S_TEAM_BOT_GH_PAT }}
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: "Remove the label ci/run-validate-kong-image if exist"
@@ -50,6 +55,11 @@ jobs:
 
       # So we need to extract the line on the position 2 lines after the heading "### Container image".
       
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: Extract container image from issue body
         id: extract_image
         env:
@@ -98,6 +108,11 @@ jobs:
       kic_branch: ${{ steps.choose_kic_branch.outputs.KIC_BRANCH }}
       kic_image_tag: ${{ steps.choose_kic_branch.outputs.KIC_IMAGE_TAG }}
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: Choose KIC image and branch
@@ -134,6 +149,11 @@ jobs:
       KIC_BRANCH: ${{ needs.decide-kic-branch-and-image.outputs.kic_branch }}
       KIC_IMAGE_TAG: ${{ needs.decide-kic-branch-and-image.outputs.kic_image_tag }} 
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
